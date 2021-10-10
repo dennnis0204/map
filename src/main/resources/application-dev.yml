@@ -11,5 +11,23 @@ spring:
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
       databaseplatform: org.hibernate.dialect.PostgreSQLDialect
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 82273722140-aknjfsd7rvbungeuggcg0sfv7e0s349n.apps.googleusercontent.com
+            client-secret: VKVEvxSlBhKxrpoEEwQDHBna
+            scope:
+              - openid
+              - email
+              - profile
+          facebook:
+            client-id: 678929842802656
+            client-secret: af5608edcb4b42e9b723e12d3f8e99ba
+            scope:
+              - email
+              - public_profile
+
   flyway:
     baseline-on-migrate: true

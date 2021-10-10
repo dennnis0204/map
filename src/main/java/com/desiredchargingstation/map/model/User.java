@@ -1,5 +1,6 @@
 package com.desiredchargingstation.map.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,9 +24,15 @@ public class User {
     @Column(nullable = false)
     private String email;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     private String password;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
+
+    @Column(name = "provider_id")
+    private String providerId;
 }
