@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-@Profile("dev")
+@Profile({"dev", "test"})
 public class SecurityConfigDev extends WebSecurityConfigurerAdapter {
 
     private final CustomUserDetailsService customUserDetailsService;
@@ -48,8 +48,11 @@ public class SecurityConfigDev extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .disable()
 
+                .cors()
+                .and()
+
                 .authorizeRequests()
-                .antMatchers("/", "/favicon.ico")
+                .antMatchers("/", "/favicon.ico", "/login", "/all-points")
                 .permitAll()
 
                 .anyRequest()

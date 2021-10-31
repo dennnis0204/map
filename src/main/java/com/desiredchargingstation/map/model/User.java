@@ -1,11 +1,12 @@
 package com.desiredchargingstation.map.model;
 
-import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -35,4 +36,28 @@ public class User {
 
     @Column(name = "provider_id")
     private String providerId;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ChargingPoint> chargingPoints = new ArrayList<>();
+
+    public void addChargingPoint(ChargingPoint chargingPoint) {
+        chargingPoints.add(chargingPoint);
+        chargingPoint.setUser(this);
+    }
+
+    public void removeChargingPoint(ChargingPoint chargingPoint) {
+        chargingPoints.removeIf(point -> point.getId().equals(chargingPoint.getId()));
+        chargingPoint.setUser(null);
+    }
+
+    public void updateChargingPoint(ChargingPoint chargingPoint) {
+        removeChargingPoint(chargingPoint);
+        addChargingPoint(chargingPoint);
+    }
+
+    public boolean hasChargingPoint(ChargingPoint chargingPoint) {
+        return chargingPoints.stream()
+                .filter(point -> point.getId().equals(chargingPoint.getId()))
+                .findFirst().isPresent();
+    }
 }
