@@ -1,6 +1,7 @@
 package com.desiredchargingstation.map.config;
 
 import com.desiredchargingstation.map.security.CustomUserDetailsService;
+import com.desiredchargingstation.map.security.RestAuthenticationEntryPoint;
 import com.desiredchargingstation.map.security.oauth2.CustomOAuth2UserService;
 import com.desiredchargingstation.map.security.oauth2.CustomOidcUserService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -27,6 +33,17 @@ public class SecurityConfigDev extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedMethods(Arrays.asList("GET","POST", "DELETE", "PUT"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Override
@@ -51,6 +68,10 @@ public class SecurityConfigDev extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
 
+                .exceptionHandling()
+                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
+                .and()
+
                 .authorizeRequests()
                 .antMatchers("/", "/favicon.ico", "/login", "/all-points")
                 .permitAll()
@@ -71,7 +92,7 @@ public class SecurityConfigDev extends WebSecurityConfigurerAdapter {
 
                 .logout(logout -> logout
                         .deleteCookies("JSESSIONID")
-                        .logoutSuccessUrl("/")
+                        .logoutSuccessUrl("http://localhost:3000")
                 );
 
     }
