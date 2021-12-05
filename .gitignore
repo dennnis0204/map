@@ -33,7 +33,6 @@ build/
 .vscode/
 
 application-dev.yml
-application-prod.yml
 application-test.yml
 SecurityConfigDev.java
 
