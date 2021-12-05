@@ -19,7 +19,7 @@ spring:
               - openid
               - email
               - profile
-            redirect-uri: https://desired-charging-map.herokuapp.com/login/oauth2/code/google
+            redirect-uri: {baseUrl}/login/oauth2/code/google
           facebook:
             client-id: 678929842802656
             client-secret: af5608edcb4b42e9b723e12d3f8e99ba
