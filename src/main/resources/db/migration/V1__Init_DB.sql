@@ -16,8 +16,8 @@ create table users
 create table charging_points
 (
     id        int8          not null,
-    latitude  numeric(6, 2) not null,
-    longitude numeric(6, 2) not null,
+    latitude  numeric(6, 4) not null,
+    longitude numeric(6, 4) not null,
     user_id   int8,
     primary key (id)
 );

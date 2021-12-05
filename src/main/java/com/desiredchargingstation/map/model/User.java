@@ -1,12 +1,16 @@
 package com.desiredchargingstation.map.model;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Entity
@@ -37,8 +41,15 @@ public class User {
     @Column(name = "provider_id")
     private String providerId;
 
+    @Getter(AccessLevel.NONE)
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChargingPoint> chargingPoints = new ArrayList<>();
+
+    public List<ChargingPoint> getChargingPoints() {
+        return chargingPoints.stream()
+                .sorted(Comparator.comparing(ChargingPoint::getId))
+                .collect(Collectors.toList());
+    }
 
     public void addChargingPoint(ChargingPoint chargingPoint) {
         chargingPoints.add(chargingPoint);

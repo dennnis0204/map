@@ -57,33 +57,33 @@ public class ChargingPointRestControllerIntegrationTest {
     @BeforeAll
     public static void init() {
         validNewChargingPoint = new NewChargingPointDto();
-        validNewChargingPoint.setLongitude(new BigDecimal("22.22"));
-        validNewChargingPoint.setLatitude(new BigDecimal("11.11"));
+        validNewChargingPoint.setLongitude(new BigDecimal("22.2222"));
+        validNewChargingPoint.setLatitude(new BigDecimal("11.1111"));
 
         validChargingPointDto = new ChargingPointDto();
         validChargingPointDto.setId(7L);
-        validChargingPointDto.setLongitude(new BigDecimal("22.22"));
-        validChargingPointDto.setLatitude(new BigDecimal("11.11"));
+        validChargingPointDto.setLongitude(new BigDecimal("22.2222"));
+        validChargingPointDto.setLatitude(new BigDecimal("11.1111"));
 
         invalidChargingPointDto = new ChargingPointDto();
         invalidChargingPointDto.setId(-7L);
-        invalidChargingPointDto.setLongitude(new BigDecimal("99.222"));
-        invalidChargingPointDto.setLatitude(new BigDecimal("-99.33"));
+        invalidChargingPointDto.setLongitude(new BigDecimal("99.22229"));
+        invalidChargingPointDto.setLatitude(new BigDecimal("-99.3333"));
 
         persistedChargingPointDto = new ChargingPointDto();
         persistedChargingPointDto.setId(6L);
-        persistedChargingPointDto.setLatitude(new BigDecimal("51.13"));
-        persistedChargingPointDto.setLongitude(new BigDecimal("33.66"));
+        persistedChargingPointDto.setLatitude(new BigDecimal("51.1313"));
+        persistedChargingPointDto.setLongitude(new BigDecimal("33.6666"));
 
         nonexistentChargingPointDto = new ChargingPointDto();
         nonexistentChargingPointDto.setId(88L);
-        nonexistentChargingPointDto.setLatitude(new BigDecimal("51.13"));
-        nonexistentChargingPointDto.setLongitude(new BigDecimal("33.66"));
+        nonexistentChargingPointDto.setLatitude(new BigDecimal("51.1313"));
+        nonexistentChargingPointDto.setLongitude(new BigDecimal("33.6666"));
 
         updatedChargingPointDto = new ChargingPointDto();
         updatedChargingPointDto.setId(6L);
-        updatedChargingPointDto.setLatitude(new BigDecimal("31.45"));
-        updatedChargingPointDto.setLongitude(new BigDecimal("54.45"));
+        updatedChargingPointDto.setLatitude(new BigDecimal("31.4525"));
+        updatedChargingPointDto.setLongitude(new BigDecimal("54.4523"));
     }
 
     @Test
@@ -95,8 +95,8 @@ public class ChargingPointRestControllerIntegrationTest {
                 .andDo(print())
                 .andExpect(authenticated())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.chargingPoints[1].latitude", is(11.11)))
-                .andExpect(jsonPath("$.chargingPoints[1].longitude", is(22.22)));
+                .andExpect(jsonPath("$.chargingPoints[1].latitude", is(11.1111)))
+                .andExpect(jsonPath("$.chargingPoints[1].longitude", is(22.2222)));
     }
 
     @Test
@@ -159,7 +159,7 @@ public class ChargingPointRestControllerIntegrationTest {
                 .andExpect(authenticated())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.chargingPoints[1].id", is(6)))
-                .andExpect(jsonPath("$.chargingPoints[1].latitude", is(31.45)))
-                .andExpect(jsonPath("$.chargingPoints[1].longitude", is(54.45)));
+                .andExpect(jsonPath("$.chargingPoints[1].latitude", is(31.4525)))
+                .andExpect(jsonPath("$.chargingPoints[1].longitude", is(54.4523)));
     }
 }
