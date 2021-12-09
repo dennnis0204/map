@@ -20,7 +20,7 @@ spring:
               - openid
               - email
               - profile
-            redirect-uri: https://desired-charging-map.herokuapp.com/login/oauth2/code/google
+            redirect-uri: https://desired-charging-station.herokuapp.com/login/oauth2/code/google
           facebook:
             client-id: 678929842802656
             client-secret: af5608edcb4b42e9b723e12d3f8e99ba
@@ -32,6 +32,6 @@ spring:
     baseline-on-migrate: true
 
 settings:
-  host: https://desired-charging-map.herokuapp.com/
+  host: https://desired-charging-station.herokuapp.com/
   user:
     maxPointsNumber: 2
