@@ -96,8 +96,7 @@ public class ChargingPointRestControllerIntegrationTest {
                 .andExpect(authenticated())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.chargingPoints[0].latitude", is(11.1111)))
-                .andExpect(jsonPath("$.chargingPoints[0" +
-
+                .andExpect(jsonPath("$.chargingPoints[0].longitude", is(22.2222)));
     }
 
     @Test
