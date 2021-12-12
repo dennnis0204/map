@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
@@ -36,6 +37,7 @@ public class ChargingPointServiceImpl implements ChargingPointService {
     private final UserPointsMapper userPointsMapper;
     private final ChargingPointMapper chargingPointMapper;
     private final Validator validator;
+    private final EntityManager entityManager;
 
     @Override
     public List<ChargingPointDto> getAllChargingPoints() {
@@ -81,6 +83,7 @@ public class ChargingPointServiceImpl implements ChargingPointService {
         if (user.hasChargingPoint(chargingPoint)) {
             user.updateChargingPoint(chargingPoint);
             userRepository.save(user);
+            entityManager.clear();
         } else {
             throw new ChargingPointDoesNotExistException(USER_HAS_NO_SUCH_POINT_MESSAGE);
         }
