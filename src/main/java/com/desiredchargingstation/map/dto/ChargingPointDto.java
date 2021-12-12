@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Data
 public class ChargingPointDto {
@@ -23,4 +24,9 @@ public class ChargingPointDto {
     @DecimalMax(value = "180.00", message = "Max longitude value is 180.00")
     @Digits(integer = 2, fraction = 4, message = "Wrong longitude format")
     private BigDecimal longitude;
+
+    private Date createdAt;
+
+    private Date updatedAt;
+
 }

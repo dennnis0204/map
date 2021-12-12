@@ -10,7 +10,7 @@ import java.util.Objects;
 @Data
 @Entity
 @Table(name="charging_points")
-public class ChargingPoint {
+public class ChargingPoint extends AuditModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "charging_points_id_seq")
